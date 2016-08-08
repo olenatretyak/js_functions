@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>JS Functions</title>
+</head>
+
+<script type="text/javascript">
+
+  var game = function (cofRand, cofGameMoney, oldWin) {
+    var randNumb = Math.floor(Math.random() * (5*cofRand - 0 + 1)) + 0;
+
+    var attempt = 1;
+    var number = -1;
+
+    while (attempt <= 3 && number != randNumb) {
+      if (attempt != 1) {
+        number = prompt("Спробуйте відгадати число ще раз", "");
+      } else {
+        number = prompt("Відгадайте число від 0 до " + 5*cofRand, "");
+      }
+      attempt ++;
+    } 
+
+    if (number != randNumb) {
+      var nextGame = confirm("Ваш виграш - 0$. Бажаєте зіграти ще раз?");
+      if (nextGame == true) {
+        game(1, 1, 0);
+      } else {
+        console.log("Заходьте ще. Або йдіть шукати покемонів")
+      }
+    } else {
+      if (attempt == 2) {
+        var newWin = 10*cofGameMoney + oldWin;
+      } else if (attempt == 3) {
+        var newWin = 5*cofGameMoney + oldWin;
+      } else {
+        var newWin = 2*cofGameMoney + oldWin;
+      }
+      console.log("Ви виграли " + newWin + "$")
+
+      var nextGame = confirm("Бажаєте зіграти ще раз? Ваш виграш збільшиться втричі, але зміниться умова.");
+      if (nextGame == true) {
+        game(2*cofRand, 3*cofGameMoney, newWin);
+      } else {
+        console.log("Заходьте ще. Або йдіть шукати покемонів.")
+      }
+    }  
+
+  }
+
+  var startGame = confirm("Бажаєте почати гру?")
+
+  if (startGame == false) {
+    console.log("Сьогодні ви не виграли мільйон, а могли...");
+  } else {
+    game(1, 1, 0);
+  }
+
+
+
+</script>
+
+<body>
+
+</body>
+</html>
